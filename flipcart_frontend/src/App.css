@@ -1,0 +1,44 @@
+
+
+.bg-color{
+  background-color: #2874F0;
+
+}
+p,h1,h2,h3,h4,h5,h6,a{
+  padding: 0;
+  margin: 0;
+}
+.imgsize{
+  height: 200px;
+  width: 300px;
+}
+.logoutbtn{
+  cursor: pointer;
+}
+.imgsize{
+  height: 150px;
+  width: 150px;
+}
+.eye{
+margin-left: -18px;
+}
+.eye-icon{
+margin-left: -18px;
+
+}
+a{
+  color: rgb(211, 235, 255);
+}
+.imsize{
+  height: 70px;
+  width: 70px;
+}
+.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.light {
+  background-color: #fff;
+  color: #333;
+}
