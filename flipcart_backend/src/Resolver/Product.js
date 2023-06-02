@@ -1,6 +1,6 @@
 import productSchema from "../model/productSchema.js";
 import Stripe from 'stripe';
-const stripe = new Stripe('sk_test_51N6WIySEXyEfFfEC2Gdy7czIdtzu2vcwU2nKHcMAacfFIMvjUzN0ea2xup5ylD8zkmxOr2CS6l3BpZpxlGMT7u0y006dNaPn0T');
+const stripe = new Stripe('');
 
 const Product = {
     Query: {
