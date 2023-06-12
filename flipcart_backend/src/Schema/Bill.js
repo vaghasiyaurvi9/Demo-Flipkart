@@ -18,14 +18,14 @@ type shipping{
   phone:String
 }
 type Product{
-      customerId: String,
-      userId:String
-      name: String,
-      quantity: Number,
-      price: Number,
-      totalPrice: Number,
-      url: String
-    }
+  customerId: String,
+  userId:String
+  name: String,
+  quantity: Number,
+  price: Number,
+  totalPrice: Number,
+  url: String
+}
 
 
 type Bills{ 
@@ -40,8 +40,8 @@ type Bills{
 } 
 
 type Query{
-    Bills:[Bills]
-    getBills(id:ID):Bills 
+  Bills:[Bills]
+  getBills(id:ID):Bills 
 }
 `
 export default Billtype

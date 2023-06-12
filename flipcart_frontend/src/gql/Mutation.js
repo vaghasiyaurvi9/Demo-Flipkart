@@ -37,6 +37,7 @@ mutation AddProduct($addProduct: addProductinput!) {
     price
     productDetail
     url
+    status
     Stripe_Id
     Stripe_priceId
   }
@@ -71,6 +72,7 @@ mutation UpdateProduct($updateProduct: updateProductinput!) {
     brand
     category
     url
+    status
     Stripe_Id
     Stripe_priceId
   }

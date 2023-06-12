@@ -16,7 +16,7 @@ const Login = () => {
         onCompleted(data) {
             localStorage.setItem('token', data.loginUser.token);
             localStorage.setItem('id', data.loginUser._id);
-            localStorage.setItem('userData',JSON.stringify(data))
+            localStorage.setItem('userData', JSON.stringify(data))
 
             navigate('/');
 
@@ -37,7 +37,6 @@ const Login = () => {
             ...loginField,
             [event.target.name]: event.target.value
         })
-        // console.log(loginField);
 
     }
 
@@ -57,8 +56,8 @@ const Login = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          
-            });
+
+        });
 
 
     }

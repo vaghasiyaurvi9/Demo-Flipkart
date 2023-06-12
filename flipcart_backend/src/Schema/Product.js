@@ -8,6 +8,7 @@ type products{
     brand:String
     category:String
     url:String
+    status:String
     Stripe_Id:String      
     Stripe_priceId: String
 }
@@ -18,17 +19,19 @@ input addProductinput{
     brand:String!
     category:String!
     url:String
+    status:String!
 
 }
 
 input updateProductinput{
     _id:ID!
-    name:String!
-    price:String!
-    productDetail:String!
-    brand:String!
-    category:String!
+    name:String
+    price:String
+    productDetail:String
+    brand:String
+    category:String
     url:String
+    status:String
 }
 
 type Query{
@@ -45,8 +48,6 @@ type Mutation{
     updateProduct(updateProduct:updateProductinput!):products
     deleteProduct(_id:ID!):products 
 }
-
-
 `
 
 export default Product

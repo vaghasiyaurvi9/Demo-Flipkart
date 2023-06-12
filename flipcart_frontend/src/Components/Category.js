@@ -15,7 +15,7 @@ const Category = () => {
         console.log(error);
     }
     if (data) {
-        console.log(data);
+        console.log("===datacategory", data);
     }
     // color change of active category
     const handleClickCategory = (category) => {
@@ -24,7 +24,7 @@ const Category = () => {
     return (
         <div>
 
-            <div className="bg-white border border-bottom mb-3">
+            <div className="bg-white border border-bottom mb-3 ">
                 <div className="row justify-content-center mt-3">
                     <div className="col-auto">
                         <img src={require('../images/1.webp')} alt="" className='h-75 w-50' />
@@ -69,9 +69,11 @@ const Category = () => {
                 <div className="row justify-content-center pb-2 ">
 
                     {
-                        data.category.map((getCategory, key) => {
+                        data?.category?.map((getCategory, key) => {
                             return (
+                                getCategory.status === "visible" ?
                                 <div className='col-1 ' key={key}>
+
                                     <Link to={`/category/${getCategory.name}`} className='text-decoration-none'>
                                         <p className={activeCategory === getCategory.name ? 'active' : ''}
                                             onClick={() => handleClickCategory(getCategory.name)}
@@ -80,8 +82,9 @@ const Category = () => {
 
                                             }}> {getCategory.name}
 
-                                        </p></Link>
-                                </div>
+                                        </p>
+                                    </Link>
+                                </div> : ''
                             )
                         })
                     }

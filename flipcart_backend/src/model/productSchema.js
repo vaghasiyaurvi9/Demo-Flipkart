@@ -4,9 +4,9 @@ const productSchema = mongoose.Schema({
     name:{
         type:String,
         // required:true,
-        minlength:2,
-        maxlength:100,
-        trim:true
+        // minlength:2,
+        // maxlength:100,
+        // trim:true
     },
     price:{
         type:String,
@@ -28,6 +28,11 @@ const productSchema = mongoose.Schema({
         type:String,
         // required:true,
         trim:true
+
+    },
+    status:{
+        type:String,
+
 
     },
     url:String,

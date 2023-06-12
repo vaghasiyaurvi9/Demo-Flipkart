@@ -7,8 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
-    const [passwordType, setPasswordType] = useState("password");
     const navigate = useNavigate();
+    const [passwordType, setPasswordType] = useState("password");
     const [formFiled, setFormField] = useState({});
 
     const inputTarget = (event) => {
@@ -23,8 +23,8 @@ const Register = () => {
         onCompleted(data) {
             if (data) {
                 navigate('/login');
-                localStorage.setItem('UserData',JSON.stringify(data));
-               
+                localStorage.setItem('UserData', JSON.stringify(data));
+
             }
         }
     });
@@ -55,8 +55,8 @@ const Register = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          
-            });
+
+        });
 
     }
     const togglePassword = () => {
@@ -66,7 +66,7 @@ const Register = () => {
         }
         setPasswordType("password");
     }
-    
+
     return (
         <div>
             {
@@ -102,7 +102,7 @@ const Register = () => {
                             <div>
                                 <input type="submit" value="submit" className='btn btn-primary px-5 rounded-pill mb-4' />
                             </div>
-                            
+
                             <Link to="/login" className=' pb-4'><p>Now able to Login data</p></Link>
 
                         </div>

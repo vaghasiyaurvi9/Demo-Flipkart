@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react'
 import { ADD_PRODUCTS, UPDATE_PRODUCT } from '../gql/Mutation';
 import { ItemContext } from './Context';
 import { GET_SINGLE_PRODUCT } from '../gql/Queries';
-// import ProductTable, { contexData } from './ProductTable';
 
 const Product = () => {
 
@@ -23,7 +22,6 @@ const Product = () => {
 
 
   const productInput = (event) => {
-
     setproduct({
       ...product,
       [event.target.name]: event.target.value
@@ -32,7 +30,7 @@ const Product = () => {
 
 
   if (data) {
-    console.log(data);
+    console.log("===data", data);
   }
   if (error) {
     console.log(error);
@@ -40,16 +38,14 @@ const Product = () => {
   if (loading) return <h4>loading....</h4>
 
   let productschema = {
-    // _id: selectedId,
     name: product.name,
     price: product.price,
     brand: product.brand,
     category: product.category,
     productDetail: product.productDetail,
-    url: image
+    url: image,
+    status: product.status
   }
-
-  console.log("====image====", image);
 
   const submitProductData = (event) => {
     event.preventDefault();
@@ -60,13 +56,14 @@ const Product = () => {
       price: product.price,
       brand: product.brand,
       category: product.category,
+      status: product.status,
       productDetail: product.productDetail,
       url: image
     }
+
     console.log("productschema====", productschema);
 
     if (selectedId === 0) {
-      // console.log(productschema);
       addProductdata({
         variables: {
           addProduct: productschema
@@ -110,7 +107,6 @@ const Product = () => {
         <section className="content-header">
           <div className="container-fluid">
             <div className="row mb-2">
-              {/* <h1>selectedId:::{selectedId}</h1> */}
               <h1 className='text-primary'> Add PRODUCT</h1>
 
 
@@ -147,6 +143,10 @@ const Product = () => {
                       <div className="form-group">
                         <label htmlFor="exampleInputPassword1">category:</label>
                         <input type="text" className="form-control" id="exampleInputPassword1" value={product.category} onChange={productInput} name='category' />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputPassword1">status:</label>
+                        <input type="text" className="form-control" id="exampleInputPassword1" value={product.status} onChange={productInput} name='status' />
                       </div>
 
                       <div className="form-group">

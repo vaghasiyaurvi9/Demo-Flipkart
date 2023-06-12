@@ -9,8 +9,7 @@ const ProductIndex = () => {
     <>
       <ItemContext.Provider value={{ selectedId, setSelectedId }}>
         <Product />
-        <ProductTable />
-        
+        <ProductTable />        
       </ItemContext.Provider>
 
     </>

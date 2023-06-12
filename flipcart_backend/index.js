@@ -1,28 +1,21 @@
-import { startStandaloneServer } from '@apollo/server/standalone';
+import 'dotenv/config.js'
 import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
-import 'dotenv/config.js'
-// import { ApolloServer } from '@apollo/server';
-import typeDefs from './src/Schema/index.js';
-import resolvers from './src/Resolver/index.js';
 import express from "express";
 import Stripe from 'stripe';
 import http from 'http';
 import cors from 'cors';
+import Jwt from "jsonwebtoken";
 import Carts from './src/model/CartSchema.js';
 import Bills from './src/model/Bill.js';
-import Jwt from "jsonwebtoken";
-
+import typeDefs from './src/Schema/index.js';
+import resolvers from './src/Resolver/index.js';
 const { KEY_TOKEN } = process.env;
-
-
-
-
 
 const app = express();
 app.use(cors()),
-// app.use(graphqlUploadExpress());
-app.use(express.static('public'));
+
+  app.use(express.static('public'));
 
 const httpServer = http.createServer(app);
 
@@ -36,18 +29,13 @@ async function Server() {
     typeDefs,
     resolvers,
 
-    context: async ({ req }) => {
+    // context: async ({ req }) => {
+    //   let { authorization } = req.headers;
+    //   const userId = Jwt.verify(authorization, KEY_TOKEN);
+    //   const { id } = userId;
+    //   return { id }
 
-      let { authorization } = req.headers;
-
-
-      const  userId  = Jwt.verify(authorization, KEY_TOKEN);
-
-      // console.log("userId===", userId);
-      const {id} = userId;
-      return { id }
-
-    }
+    // }
 
 
   });
@@ -55,7 +43,7 @@ async function Server() {
 
 
   const createOrder = async (customer, data) => {
-    
+
     const customerId = customer.id
     const query = { customerId: { $regex: customerId } };
     const cartData = await Carts.find(query);
@@ -80,8 +68,8 @@ async function Server() {
     }
   };
 
-  const stripe = new Stripe("");
-  const endpointSecret = ""
+  const stripe = new Stripe("sk_test_51N6WIySEXyEfFfEC2Gdy7czIdtzu2vcwU2nKHcMAacfFIMvjUzN0ea2xup5ylD8zkmxOr2CS6l3BpZpxlGMT7u0y006dNaPn0T");
+  const endpointSecret = "whsec_8e8811bb17767af7a61f6e26ed1ff4c2437e827d5409e59a24c97feb286e34c2"
 
   app.post('/api/webhook', express.raw({ type: 'application/json' }), (request, response) => {
     const sig = request.headers['stripe-signature'];

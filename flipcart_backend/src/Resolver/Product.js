@@ -1,6 +1,6 @@
 import productSchema from "../model/productSchema.js";
 import Stripe from 'stripe';
-const stripe = new Stripe('');
+const stripe = new Stripe('sk_test_51N6WIySEXyEfFfEC2Gdy7czIdtzu2vcwU2nKHcMAacfFIMvjUzN0ea2xup5ylD8zkmxOr2CS6l3BpZpxlGMT7u0y006dNaPn0T');
 
 const Product = {
     Query: {
@@ -9,8 +9,6 @@ const Product = {
             return products;
 
         },
-     
-
         product: async (_, { _id }) => await productSchema.findById({ _id }),
         searchItem: async (_, { searchItem }) => {
             if (!searchItem) {
@@ -31,9 +29,7 @@ const Product = {
 
             const results = {}
             results.totalProduct = productData.length;
-            // console.log("totalProduct===", results.totalProduct);
             results.pageCount = Math.ceil(productData.length / pageSize);
-            // console.log("pageCount===", results.pageCount);
 
 
             if (lastIndex < productData.length) {
@@ -51,8 +47,6 @@ const Product = {
             // console.log('results.result',results.result);
             console.log("results===", results);
             return results;
-            
-
         }
 
     },
@@ -60,9 +54,6 @@ const Product = {
     Mutation: {
         //add product
         addProduct: async (_, { addProduct }) => {
-            // const product = new productSchema(addProduct);
-            // const stripe = new Stripe(process.env.STRIPE_S_KEY);
-
             // product add in stripe
 
             const product = await stripe.products.create({
@@ -77,10 +68,7 @@ const Product = {
                 metadata: {
                     'brand': addProduct.brand,
                     'category': addProduct.category
-
                 }
-
-
             })
             // console.log(product);
 
@@ -90,7 +78,7 @@ const Product = {
                 Stripe_Id: product.id,
                 Stripe_priceId: product.default_price
             })
-            console.log(products);
+            console.log("===product",product);
             return await products.save();
 
         },
@@ -106,6 +94,7 @@ const Product = {
             updProduct.category = updateProduct.category
             updProduct.productDetail = updateProduct.productDetail
             updProduct.url = updateProduct.url
+            updProduct.status =updateProduct.status
 
             const product = productSchema.findByIdAndUpdate(updateProduct._id, updProduct, { new: true });
             return await product;
@@ -118,7 +107,7 @@ const Product = {
 
         },
 
-      
+
     }
 
 }

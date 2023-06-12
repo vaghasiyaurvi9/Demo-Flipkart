@@ -5,27 +5,21 @@ import { useNavigate } from 'react-router-dom';
 
 const Forgetpassword = () => {
     const navigate = useNavigate()
-    const [email,setEmail]= useState(); 
-    const [forgetPassword,{error,data}]=useMutation(FORGETPASSWORD,{
-        onCompleted(data){
-            if(data)
-            {
+    const [email, setEmail] = useState();
+    const [forgetPassword, { error, data }] = useMutation(FORGETPASSWORD, {
+        onCompleted(data) {
+            if (data) {
                 navigate('/');
-                
-                
-                localStorage.setItem('userData',JSON.stringify(data));
-             
-                
-
+                localStorage.setItem('userData', JSON.stringify(data));
             }
         }
-    } );
+    });
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         forgetPassword({
-            variables:{
-                email:email
+            variables: {
+                email: email
             }
         })
     }

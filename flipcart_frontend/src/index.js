@@ -11,18 +11,18 @@ import { CartProvider } from "react-use-cart";
 const client = new ApolloClient({
   uri: 'http://localhost:9000/graphql',
   cache: new InMemoryCache(),
-  headers:{
-    authorization:localStorage.getItem("token") || ''
+  headers: {
+    authorization: localStorage.getItem("token") || ''
   }
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
-</BrowserRouter>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </BrowserRouter>
 
 );
 

@@ -11,28 +11,26 @@ const AddCartData = () => {
     const id = localStorage.getItem('id');
     const token = localStorage.getItem('token');
     const UserData = JSON.parse(localStorage.getItem("userData"));
-
     const [cart, setcart] = useState([]);
     const [updateCarts] = useMutation(UPADTE_CART);
     const [deleteCart] = useMutation(DELETE_CART);
-    console.log("UserDatadfg", UserData);
+    // console.log("UserDatadfg", UserData);
 
 
-     // get cart
+    // get cart
     const { data, error, loading, refetch } = useQuery(CARTS, {
-       
         variables: {
             userId: id
         }, onCompleted: (data) => setcart(data?.Carts?.Item)
 
     });
 
-   
-    useEffect(()=>{
-        refetch();
-    },[])
 
-    
+    useEffect(() => {
+        refetch();
+    }, [])
+
+
     const [startCheckOut] = useLazyQuery(CHECKOUT, {
 
         variables: {
@@ -42,7 +40,7 @@ const AddCartData = () => {
         },
         onCompleted: (queryData) => {
             let checkoutData = JSON.parse(queryData.createCheckoutSession);
-            console.log("checkoutData====",checkoutData);
+            console.log("checkoutData====", checkoutData);
             let checkoutUrl = checkoutData.url
             window.location.assign(checkoutUrl)
         }
@@ -124,12 +122,12 @@ const AddCartData = () => {
     let subtotal = 0;
     let badge = 0
     // eslint-disable-next-line
-    data?.Carts?.data.map(cart => {
+   data?.Carts?.data.map(cart => {
         id === cart.userId ?
             subtotal += cart.totalPrice
             : <></>
         id === cart.userId ?
-            badge += cart.quantity
+             badge += cart.quantity
             : <></>
     });
 
@@ -138,7 +136,8 @@ const AddCartData = () => {
 
     return (
         <div>
-            <NavBar />
+            
+            <NavBar badge={badge}/>
 
             <div className="container">
                 <div className="row">
@@ -152,7 +151,7 @@ const AddCartData = () => {
                                 {
                                     cart.map((item) => {
                                         return (
-                                            <ul className='list-unstyled mt-2 d-flex ' key={item.id} data-id={item.id}>
+                                            <ul className='list-unstyled mt-2 d-flex '>
 
                                                 <div className='col-3' >
                                                     <li ><img src={item.url} alt="" className='imgsize ' /></li>
