@@ -5,17 +5,55 @@ import { GET_SINGLE_PRODUCT } from '../gql/Queries';
 import { useMutation, useQuery } from '@apollo/client';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { DELETE_ITEM, GET_WISHLIST_ITEM, WISHLIST_ITEM } from '../gql/WishlistItem';
 
 const SingleProduct = () => {
 
   const { id } = useParams();
-  const { data, error, loading } = useQuery(GET_SINGLE_PRODUCT, {
+  const [isWishList, setIsWishList] = useState('false');
+  const { data, error, loading, refetch } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { id }
   });
   const [addCarts] = useMutation(ADD_TO_CART);
   const userid = localStorage.getItem("id")
   const UserData = JSON.parse(localStorage.getItem('userData'))
-   if (error) {
+
+
+  //add wishlistitem
+  const { data: getIdData } = useQuery(GET_WISHLIST_ITEM, {
+    variables: {
+      userId: userid
+    }
+  })
+  const [addWishListItem] = useMutation(WISHLIST_ITEM);
+  const [deleteWishListItem] = useMutation(DELETE_ITEM);
+
+  const addDataToWishList = () => {
+    addWishListItem({
+      variables: {
+        wishInput: {
+          userId: userid,
+          productId: id,
+          productDetail: data.product.productDetail,
+          name: data.product.name,
+        }
+      }
+    }).then(refetch())
+    setIsWishList(true)
+  }
+
+  // const deleteWishList = (idData) => {
+  //   deleteWishListItem({
+  //     variables: {
+  //       id: idData
+  //     }
+  //   })
+  // }
+
+
+
+  if (error) {
     console.log(error);
   }
 
@@ -24,11 +62,10 @@ const SingleProduct = () => {
   }
 
   if (loading) return <h5>loading....</h5>
-  // const { name, price, brand, category, productDetail, url } = data.product;
 
 
   const cartAddData = (data) => {
- if (data.product._id) {
+    if (data.product._id) {
       let cartInput = {
         "customerId": UserData.loginUser.Stripe_Id,
         "userId": userid,
@@ -61,6 +98,14 @@ const SingleProduct = () => {
       <div className="container mt-5">
         <div className="row">
           <div className="col-xl-4">
+            {
+              isWishList === 'false' ?
+                <span> <AiOutlineHeart className='fs-1 text-danger pointer' onClick={addDataToWishList} /></span> :
+              
+                    <span> <AiFillHeart className='fs-1 text-danger pointer' /></span>
+          
+
+            }
             <img src={data.product.url} alt="" />
           </div>
           <div className="col-xl-5 ms-auto p-5">
@@ -76,7 +121,7 @@ const SingleProduct = () => {
 
       <Footer />
 
-    </div>
+    </div >
   )
 }
 

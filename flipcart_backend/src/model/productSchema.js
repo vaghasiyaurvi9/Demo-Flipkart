@@ -32,9 +32,7 @@ const productSchema = mongoose.Schema({
     },
     status:{
         type:String,
-
-
-    },
+ },
     url:String,
     Stripe_Id:String    ,  
     Stripe_priceId: String

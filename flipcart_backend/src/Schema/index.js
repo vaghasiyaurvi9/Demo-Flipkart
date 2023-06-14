@@ -5,6 +5,7 @@ import category from "./Category.js"
 import Product from "./Product.js"
 import Stripes from "./Stripe.js"
 import user from "./User.js"
+import wishlistItem from "./WishlistItem.js"
 
 
 const typeDefs = [
@@ -15,6 +16,7 @@ const typeDefs = [
     Cart,
     Stripes,
     Billtype,
+    wishlistItem
         
 ]
 

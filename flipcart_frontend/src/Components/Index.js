@@ -47,7 +47,7 @@ const Index = () => {
       <div className="container">
         <div className="row col-3">
           <label >Sort By:</label>
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}> 
             <option value="">None</option>
             <option value="ASC">Price (Ascending)</option>
             <option value="DESC">Price (Descending)</option>
