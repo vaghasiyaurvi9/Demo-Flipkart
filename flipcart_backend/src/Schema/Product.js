@@ -9,6 +9,7 @@ type products{
     category:String
     url:String
     status:String
+    rating:Int
     Stripe_Id:String      
     Stripe_priceId: String
 }
@@ -47,6 +48,7 @@ type Mutation{
     addProduct(addProduct:addProductinput!):products
     updateProduct(updateProduct:updateProductinput!):products
     deleteProduct(_id:ID!):products 
+    rateProduct(rating:Int,productId:ID,userId:ID):products
 }
 `
 

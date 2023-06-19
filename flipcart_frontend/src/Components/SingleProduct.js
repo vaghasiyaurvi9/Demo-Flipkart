@@ -7,8 +7,10 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { DELETE_ITEM, GET_WISHLIST_ITEM, WISHLIST_ITEM } from '../gql/WishlistItem';
+import Rating from './Rating';
 
 const SingleProduct = () => {
+ 
 
   const { id } = useParams();
   const [isWishList, setIsWishList] = useState('false');
@@ -104,7 +106,6 @@ const SingleProduct = () => {
               
                     <span> <AiFillHeart className='fs-1 text-danger pointer' /></span>
           
-
             }
             <img src={data.product.url} alt="" />
           </div>
@@ -115,6 +116,8 @@ const SingleProduct = () => {
             <p className='mt-3 fs-4'> Category : {data.product.category}</p>
             <p className='mt-3 fs-4'> price : {data.product.price}</p>
             <button className='btn btn-primary mt-3 px-4 ' onClick={() => cartAddData(data)}>Add To Cart</button>
+            <Rating/>
+
           </div>
         </div>
       </div>

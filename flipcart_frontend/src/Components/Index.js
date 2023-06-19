@@ -9,7 +9,8 @@ import Footer from './Footer'
 import { searchContexData } from './Contex'
 
 const Index = () => {
-  const { Data, setData } = useContext(searchContexData);
+  const [valueData, setValueData] = useState([0])
+  let { Data, setData } = useContext(searchContexData);
   const [sortBy, setSortBy] = useState('');
   const pageSize = 6;
   const [page, setPage] = useState(0);
@@ -26,17 +27,24 @@ const Index = () => {
   if (error) {
     console.log(error);
   }
-  console.log("Data===", Data);
 
 
 
-  // let Data = data?.products;
+
+  let DataSort = data?.products;
 
   if (sortBy === 'ASC') {
-    Data = Data.slice().sort((a, b) => a.price - b.price);
+    Data = DataSort.slice().sort((a, b) => a.price - b.price);
   } else if (sortBy === 'DESC') {
-    Data = Data.slice().sort((a, b) => b.price - a.price);
+    Data = DataSort.slice().sort((a, b) => b.price - a.price);
   }
+  // Data = DataSort.filter((number) => number.price <= valueData);
+
+  // const min = valueData[0];
+  // const max =valueData[1];
+  // Data= DataSort.filter((i)=> i.price >= min && i.price <= max)
+
+
 
   return (
     <div>
@@ -47,13 +55,16 @@ const Index = () => {
       <div className="container">
         <div className="row col-3">
           <label >Sort By:</label>
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}> 
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="">None</option>
             <option value="ASC">Price (Ascending)</option>
             <option value="DESC">Price (Descending)</option>
           </select>
+          {/* <input type="range" min='0' max='1000' step='10' value={valueData} onChange={(e) => { setValueData(e.target.value) }} />
+          <p>{valueData}</p> */}
         </div>
       </div>
+
 
       <div className="container">
         <div className="row mt-5">

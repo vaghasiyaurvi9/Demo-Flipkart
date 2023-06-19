@@ -1,41 +1,44 @@
 import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema({
-    name:{
-        type:String,
+    name: {
+        type: String,
         // required:true,
         // minlength:2,
         // maxlength:100,
         // trim:true
     },
-    price:{
-        type:String,
+    price: {
+        type: String,
         // required:true,
-        min:1,
+        min: 1,
 
     },
-    productDetail:{
-        type:String,
+    productDetail: {
+        type: String,
         // required:true,
-        trim:true
+        trim: true
     },
-    brand:{
-        type:String,
+    brand: {
+        type: String,
         // required:true,
-        trim:true
+        trim: true
     },
-    category:{
-        type:String,
+    category: {
+        type: String,
         // required:true,
-        trim:true
+        trim: true
 
     },
-    status:{
-        type:String,
- },
-    url:String,
-    Stripe_Id:String    ,  
+    status: {
+        type: String,
+    },
+    rating:{
+        type:Number
+    },
+    url: String,
+    Stripe_Id: String,
     Stripe_priceId: String
 })
 
-export default mongoose.model('productDetail',productSchema);
+export default mongoose.model('productDetail', productSchema);

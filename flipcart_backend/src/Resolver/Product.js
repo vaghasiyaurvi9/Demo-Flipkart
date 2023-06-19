@@ -106,6 +106,16 @@ const Product = {
             return await product;
 
         },
+        rateProduct :async (_,{rating,productId,userId}) =>{
+            const createrating = await productSchema.create({rating})
+            
+            const product =await new productSchema({
+                    rating:createrating,
+                    productId:productId,
+                    userId:userId
+            })
+            return await product.save();
+        }
 
 
     }

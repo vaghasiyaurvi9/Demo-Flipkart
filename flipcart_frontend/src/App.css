@@ -124,3 +124,10 @@ input:checked + .slider:before {
 .pointer{
   cursor: pointer;
 }
+.star{
+  cursor: pointer;
+  transition: color 200ms;
+}
+input[type="radio"]{
+  display: none;
+}
