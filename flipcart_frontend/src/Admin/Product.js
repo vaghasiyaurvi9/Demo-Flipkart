@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { ADD_PRODUCTS, UPDATE_PRODUCT } from '../gql/Mutation';
 import { ItemContext } from './Context';
 import { GET_SINGLE_PRODUCT } from '../gql/Queries';
+import Loader from '../Components/Loader';
 
 const Product = () => {
 
@@ -35,7 +36,7 @@ const Product = () => {
   if (error) {
     console.log(error);
   }
-  if (loading) return <h4>loading....</h4>
+  if (loading) return <Loader/>
 
   let productschema = {
     name: product.name,

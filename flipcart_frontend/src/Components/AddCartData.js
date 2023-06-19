@@ -52,7 +52,7 @@ const AddCartData = () => {
 
     console.log("addtocart===", cart);
 
-    if (loading) return <h1>loading.....</h1>
+    // if (loading) return <h1>loading.....</h1>
 
     const removeCart = (cart) => {
 

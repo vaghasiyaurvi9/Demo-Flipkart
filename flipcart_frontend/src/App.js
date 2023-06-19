@@ -18,6 +18,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchContext from "./Components/SearchContext";
 import WishListItem from "./Components/WishListItem";
+import Contact from "./Components/Contact";
 
 
 
@@ -41,6 +42,8 @@ function App() {
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/" element={<SearchContext />} />  
         <Route path="/wishlistitem" element={<WishListItem />} />  
+        <Route path="/contact" element={<Contact />} />  
+
 
       </Routes>
       <ToastContainer />

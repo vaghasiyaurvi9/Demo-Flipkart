@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from './Loader';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Register = () => {
         console.log(error);
     }
 
-    if (loading) return <h4>loading.....</h4>
+    if (loading) return <Loader/>
 
     if (data) {
         console.log(data);

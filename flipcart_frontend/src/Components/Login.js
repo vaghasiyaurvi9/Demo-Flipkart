@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Loader from './Loader';
 const Login = () => {
 
     const [passwordType, setPasswordType] = useState("password");
@@ -26,7 +27,7 @@ const Login = () => {
     if (error) {
         console.log(error);
     }
-    if (loading) return <h6>loading....</h6>
+    if (loading) return <Loader/>
 
     if (data) {
         console.log(data);

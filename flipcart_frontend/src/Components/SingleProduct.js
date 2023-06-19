@@ -8,6 +8,7 @@ import Footer from './Footer';
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { DELETE_ITEM, GET_WISHLIST_ITEM, WISHLIST_ITEM } from '../gql/WishlistItem';
 import Rating from './Rating';
+import Loader from './Loader';
 
 const SingleProduct = () => {
  
@@ -63,7 +64,8 @@ const SingleProduct = () => {
     console.log("data===", data);
   }
 
-  if (loading) return <h5>loading....</h5>
+  if (loading) return <Loader/>
+
 
 
   const cartAddData = (data) => {
@@ -121,9 +123,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
-
+      <Footer/>
     </div >
   )
 }

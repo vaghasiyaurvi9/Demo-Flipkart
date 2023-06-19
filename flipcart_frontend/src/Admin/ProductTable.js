@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table';
 import { GET_ALL_PRODUCT } from '../gql/Queries';
 import { DELETE_PRODUCT, UPDATE_PRODUCT } from '../gql/Mutation';
 import { ItemContext } from './Context';
+import Loader from '../Components/Loader';
 
 const ProductTable = () => {
     const { selectedId, setSelectedId } = useContext(ItemContext);
@@ -34,7 +35,7 @@ const ProductTable = () => {
         console.log(error);
     }
 
-    if (loading) return <h1>loading...</h1>
+    if (loading) return <Loader/>
 
     //deletedata
     const deleteProduct = (id) => {

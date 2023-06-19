@@ -18,7 +18,7 @@ const ProductByCategory = () => {
         }
     });
 
-    if (loading) return <h1>loading....</h1>
+    // if (loading) return <h1>loading....</h1>
 
     if (data) {
         console.log(data);

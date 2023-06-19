@@ -7,6 +7,7 @@ import { GET_ALL_PRODUCT } from '../gql/Queries'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
 import { searchContexData } from './Contex'
+import Loader from './Loader'
 
 const Index = () => {
   const [valueData, setValueData] = useState([0])
@@ -22,7 +23,7 @@ const Index = () => {
   });
 
 
-  if (loading) return <h5>loading...</h5>
+  
 
   if (error) {
     console.log(error);
@@ -45,7 +46,8 @@ const Index = () => {
   // Data= DataSort.filter((i)=> i.price >= min && i.price <= max)
 
 
-
+  
+  if (loading) return <Loader />
   return (
     <div>
       <Category />

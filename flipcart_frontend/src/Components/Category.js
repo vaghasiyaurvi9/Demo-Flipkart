@@ -10,7 +10,7 @@ const Category = () => {
 
     const { data, error, loading } = useQuery(GET_ALL_CATEGORY);
 
-    if (loading) return <p>Loading...</p>
+    // if (loading) return <p>Loading...</p>
     if (error) {
         console.log(error);
     }
@@ -60,11 +60,7 @@ const Category = () => {
                     </div>
                     <div className="col-auto">
                         <img src={require('../images/9.webp')} alt="" className='h-75 w-50' />
-
                     </div>
-
-
-
                 </div>
                 <div className="row justify-content-center pb-2 ">
 
@@ -84,7 +80,8 @@ const Category = () => {
 
                                         </p>
                                     </Link>
-                                </div> : ''
+                                </div> 
+                                : ''
                             )
                         })
                     }

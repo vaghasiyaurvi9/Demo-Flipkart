@@ -36,13 +36,14 @@ const Product = {
                 results.next = {
                     page: page + 1,
                 }
-
             }
+            
             if (startIndex > 0) {
                 results.prev = {
                     page: page - 1,
                 }
             }
+
             results.product = productData.slice(startIndex, lastIndex);
             // console.log('results.result',results.result);
             console.log("results===", results);

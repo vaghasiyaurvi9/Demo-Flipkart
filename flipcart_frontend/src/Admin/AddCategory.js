@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/esm/Table';
 import { BsFillTrash3Fill } from 'react-icons/bs';
 import { MdBrowserUpdated } from 'react-icons/md';
 import { CATEGORY_BY_ID, DELETE_CATEGORY, UPDATE_CATEGORY } from '../gql/category';
+import Loader from '../Components/Loader';
 
 const AddCategory = () => {
   const [updateId, setUpdateId] = useState('')
@@ -35,7 +36,7 @@ const AddCategory = () => {
   if (error) {
     console.log(error);
   }
-  if (loading) return <h4>loading....</h4>
+  if (loading) return <Loader/>
 
   const categoryData = (e) => {
     setcategoryDataTarget({

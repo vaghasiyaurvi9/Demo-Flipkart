@@ -131,3 +131,6 @@ input:checked + .slider:before {
 input[type="radio"]{
   display: none;
 }
+.loader-center{
+  margin-top: 25%;
+}

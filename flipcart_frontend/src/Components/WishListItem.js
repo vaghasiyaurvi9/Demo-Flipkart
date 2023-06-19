@@ -3,6 +3,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { useQuery } from '@apollo/client'
 import { GET_WISHLIST_ITEM } from '../gql/WishlistItem'
+import Loader from './Loader'
 
 const WishListItem = () => {
     const userid = localStorage.getItem("id")
@@ -15,11 +16,12 @@ const WishListItem = () => {
         refetch();
     },[refetch])
     console.log("===data", data);
+    if(loading) return <Loader/>
     return (
         <div>
             <NavBar />
             {/* <h1 className='text-center text-primary mt-3'>WishList Item</h1> */}
-            <div className="container mt-5" >
+            <div className="container mt-5 mb-5 pb-5 py-5 my-5" >
                 <div className="row">
                     <div className="col-10">
                         {
