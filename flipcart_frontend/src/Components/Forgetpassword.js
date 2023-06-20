@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Forgetpassword = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState();
-    const [forgetPassword, { error, data }] = useMutation(FORGETPASSWORD, {
+    const [forgetPassword, { error, data}] = useMutation(FORGETPASSWORD, {
         onCompleted(data) {
             if (data) {
                 navigate('/');

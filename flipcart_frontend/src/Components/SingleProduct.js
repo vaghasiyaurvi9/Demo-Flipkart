@@ -12,34 +12,35 @@ import Rating from './Rating';
 import Loader from './Loader';
 
 const SingleProduct = () => {
-  const [readMore, setReadMore] = useState(false);
-  
-  const extraContent = <div>
-    <p className="extra-content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur neque ab
-      porro quasi culpa nulla rerum quis minus voluptatibus sed hic ad quo sint, libero
-      commodi officia aliquam! Maxime.
-    </p>
-  </div>
-  const linkName = readMore ? 'Read Less << ' : 'Read More >> '
+  // read more functionality
+  const [readMore, setReadMore] = useState(true);
+  const toggleReadMore = () => {setReadMore(!readMore)};
 
   const { id } = useParams();
 
-  const [isWishList, setIsWishList] = useState('false');
   const { data, error, loading, refetch } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { id }
   });
   const [addCarts] = useMutation(ADD_TO_CART);
   const userid = localStorage.getItem("id")
   const UserData = JSON.parse(localStorage.getItem('userData'))
-
-
+  
+  
+  const [isWishList, setIsWishList] = useState('false');
   //add wishlistitem
   const { data: getIdData } = useQuery(GET_WISHLIST_ITEM, {
     variables: {
       userId: userid
-    }
+    },onCompleted : (getIdData) => { getIdData.getWishList.map((i) => {     
+      return(
+        <>
+        {i.productId === id ?  setIsWishList('true') : setIsWishList('false')}      
+        
+        </>
+      )
+    })}
   })
+  console.log('getIdData====',getIdData);
   const [addWishListItem] = useMutation(WISHLIST_ITEM);
   const [deleteWishListItem] = useMutation(DELETE_ITEM);
 
@@ -54,7 +55,7 @@ const SingleProduct = () => {
         }
       }
     }).then(refetch())
-    setIsWishList(true)
+    setIsWishList('true')
   }
 
   // const deleteWishList = (idData) => {
@@ -105,7 +106,9 @@ const SingleProduct = () => {
       })
     }
   }
+
   let img = data.product.url;
+  let text = data.product.productDetail
 
 
   return (
@@ -135,25 +138,21 @@ const SingleProduct = () => {
                 height: 2000
               }
             }} />
-
           </div>
           <div className="col-xl-5 ms-auto p-5">
-
-
             <h1 className='text-primary'>{data.product.name}</h1>
-            <p>{data.product.productDetail}</p>
+            <p> {readMore ? text.slice(0, 149) : text}
+              {text.length > 150 &&
+                <span onClick={toggleReadMore} className='text-primary'>
+                  {readMore ? '...read more' : ' ...show less'}
+                </span>
+              }
+            </p>
             <p className='mt-3 fs-4'> Brand : {data.product.brand}</p>
             <p className='mt-3 fs-4'> Category : {data.product.category}</p>
             <p className='mt-3 fs-4'> price : {data.product.price}</p>
             <button className='btn btn-primary mt-3 px-4 ' onClick={() => cartAddData(data)}>Add To Cart</button>
             <Rating />
-
-
-
-            <div className="App">
-              <a className="read-more-link" onClick={() => { setReadMore(!readMore) }}><h2>{linkName}</h2></a>
-              {readMore && extraContent}
-            </div>
           </div>
         </div>
       </div>
@@ -161,5 +160,6 @@ const SingleProduct = () => {
     </div >
   )
 }
+
 
 export default SingleProduct

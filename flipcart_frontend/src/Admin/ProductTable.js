@@ -104,9 +104,10 @@ const ProductTable = () => {
                                     <td className=''><img src={value.url} alt="" className='w-25 ' /></td>
                                     <td><button className='border-0 fs-3' onClick={() => { deleteProduct(value._id) }}><BsFillTrash3Fill className='text-danger' /></button></td>
                                     <td><button className='border-0 fs-3' onClick={() => { setSelectedId(value._id) }}><MdBrowserUpdated className='text-success' /></button></td>
+                                  
                                     <td>
+                                        <p>{value.status}</p>
                                         <label className="switch">
-                                            <p>{value.status}</p>
                                             <input type="checkbox" id={"switched" + index} onChange={(e) => switchhandler(e.target.checked, value._id)} />
                                             <span className="slider round" />
                                         </label>

@@ -30,9 +30,9 @@ const Product = () => {
   }
 
 
-  if (data) {
-    console.log("===data", data);
-  }
+  // if (data) {
+    console.log("products==== ", product.status);
+  // }
   if (error) {
     console.log(error);
   }

@@ -29,11 +29,8 @@ const WishListItem = () => {
                                 return (
                                     <div className='border mb-2'>
                                         <h1 className='text-primary text-center'>{item.name}</h1>
-                                        <span>- {item.productDetail}</span>
-                                       
+                                        <span>- {item.productDetail}</span>                                       
                                     </div>
-
-
                                 )
                             })
 

@@ -28,6 +28,7 @@ query Product($id:ID!) {
     price
     productDetail
     url
+    status
     Stripe_Id
     Stripe_priceId
   }
@@ -66,6 +67,7 @@ query SearchItem($searchItem: String!) {
     productDetail
     price
     name
+    status
     category
     brand
     _id

@@ -63,9 +63,13 @@ const NavBar = ({badge}) => {
             <Link to="/login"><button className='text-primary px-5 py-2 border-0 '>Login</button></Link>
             <p className='text-white fw-bold mt-1 ms-3'>Become a Seller</p>
             <p className='text-white mx-4 fw-bold mt-1  '>More<FaArrowDown className='ms-1' /></p>
-            <Link to="/addcartdata" className='text-decoration-none'><p className='text-white fs-5 fw-bold logoutbtn text-decoration-none' ><FaCartArrowDown className='fs-4  position-relative' /><span className='badge fs-5  position-absolute top-0 left-0'>{badge}</span> Cart</p></Link>
+          
+            <Link to="/addcartdata" className='text-decoration-none position-relative'> <FaCartArrowDown className='fs-2  position-relative' /><span className=' fs-6  position-absolute top-0 start-100 translate-middle badge  rounded-circle text-dark bg-white px-2 py-1'>{badge}</span> </Link>
+           
             <Link to="/wishlistitem" className='text-decoration-none mt-1'><span className='text-white pointer mt-2 fw-bold'> <AiOutlineHeart className='fs-4 ms-3 my-auto text-white pointer'/><span className=''>WishLIst</span></span> </Link>
-            <p className='text-white fw-bold mt-1 ms-5 logoutbtn' onClick={() => { logoutData() }}>Logout</p>
+
+
+            <p className='text-white fw-bold mt-1 ms-5 logoutbtn me-5' onClick={() => { logoutData() }}>Logout</p>
             <DarkMode />
 
 

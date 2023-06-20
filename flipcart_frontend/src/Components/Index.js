@@ -10,6 +10,9 @@ import { searchContexData } from './Contex'
 import Loader from './Loader'
 
 const Index = () => {
+  const ImageperRow = 2
+  const [next, setnext] = useState(ImageperRow)
+
   const [valueData, setValueData] = useState([0])
   let { Data, setData } = useContext(searchContexData);
   const [sortBy, setSortBy] = useState('');
@@ -23,7 +26,13 @@ const Index = () => {
   });
 
 
-  
+  const handleMoreImage = () => {
+
+    setnext(next + ImageperRow);
+
+  };
+
+
 
   if (error) {
     console.log(error);
@@ -46,7 +55,7 @@ const Index = () => {
   // Data= DataSort.filter((i)=> i.price >= min && i.price <= max)
 
 
-  
+
   if (loading) return <Loader />
   return (
     <div>
@@ -73,28 +82,37 @@ const Index = () => {
           {
             Data?.length === 0 ? <h1 className='text-primary text-center mb-5'>No Result Found </h1> :
 
-              Data?.map((productdata, index) => {
+              Data?.slice(0, next)?.map((productdata, index) => {
                 return (
-                  // productdata.status === "visible" ?
-                  <div className="col-4 mb-4" key={index}>
-                    <img src={productdata.url} alt="" className='imgsize' />
-                    <div className='p-2'>
-                      <p className=' mt-1 text-primary'> Name:  {productdata.name}</p>
+                  productdata.status === "visible" ?
 
-                      <p className=''> Price: from {productdata.price}*</p>
-                      <span className=''>Brand:  {productdata.brand}</span>
-                      <p className='text-truncate'>{productdata.productDetail}</p>
-                      <Link to={`/product/${productdata._id}`}> <button className='btn btn-outline-primary mt-2  fw-bold'>View More</button></Link>
+                    <div className="col-4 mb-4" key={index}>
+                      <img src={productdata.url} alt="" className='imgsize' />
+                      <div className='p-2'>
+                        <p className=' mt-1 text-primary'> Name:  {productdata.name}</p>
+
+                        <p className=''> Price: from {productdata.price}*</p>
+                        <span className=''>Brand:  {productdata.brand}</span>
+                        <p className='text-truncate'>{productdata.productDetail}</p>
+                        <Link to={`/product/${productdata._id}`}> <button className='btn btn-outline-primary mt-2  fw-bold'>View More</button></Link>
+                      </div>
                     </div>
 
-
-                  </div>
-                  //  : ''
+                    : ''
 
                 )
               })
           }
         </div>
+        {next < Data?.length && (
+          <button
+            className="mt-4 btn btn-primary"
+            onClick={handleMoreImage}
+          >
+            Load more
+          </button>
+        )}
+           {/* <button className="mt-4 w-25 btn btn-primary" onClick={handleMoreImage}>Load more</button> */}
       </div>
       {/* pagination */}
 
