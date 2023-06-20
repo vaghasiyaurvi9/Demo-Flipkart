@@ -37,7 +37,6 @@ const Product = {
                     page: page + 1,
                 }
             }
-            
             if (startIndex > 0) {
                 results.prev = {
                     page: page - 1,

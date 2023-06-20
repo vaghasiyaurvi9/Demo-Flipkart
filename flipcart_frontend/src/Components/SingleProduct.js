@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ADD_TO_CART, CARTS } from '../gql/Cart';
 import { GET_SINGLE_PRODUCT } from '../gql/Queries';
 import { useMutation, useQuery } from '@apollo/client';
+import ReactImageMagnify from 'react-image-magnify';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -11,9 +12,19 @@ import Rating from './Rating';
 import Loader from './Loader';
 
 const SingleProduct = () => {
- 
+  const [readMore, setReadMore] = useState(false);
+  
+  const extraContent = <div>
+    <p className="extra-content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, consectetur neque ab
+      porro quasi culpa nulla rerum quis minus voluptatibus sed hic ad quo sint, libero
+      commodi officia aliquam! Maxime.
+    </p>
+  </div>
+  const linkName = readMore ? 'Read Less << ' : 'Read More >> '
 
   const { id } = useParams();
+
   const [isWishList, setIsWishList] = useState('false');
   const { data, error, loading, refetch } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { id }
@@ -64,7 +75,7 @@ const SingleProduct = () => {
     console.log("data===", data);
   }
 
-  if (loading) return <Loader/>
+  if (loading) return <Loader />
 
 
 
@@ -94,6 +105,7 @@ const SingleProduct = () => {
       })
     }
   }
+  let img = data.product.url;
 
 
   return (
@@ -105,25 +117,47 @@ const SingleProduct = () => {
             {
               isWishList === 'false' ?
                 <span> <AiOutlineHeart className='fs-1 text-danger pointer' onClick={addDataToWishList} /></span> :
-              
-                    <span> <AiFillHeart className='fs-1 text-danger pointer' /></span>
-          
+
+                <span> <AiFillHeart className='fs-1 text-danger pointer' /></span>
+
             }
-            <img src={data.product.url} alt="" />
+
+            {/*  zoom the image in side */}
+            <ReactImageMagnify {...{
+              smallImage: {
+                alt: 'Wristwatch by Ted Baker London',
+                isFluidWidth: true,
+                src: img
+              },
+              largeImage: {
+                src: img,
+                width: 1200,
+                height: 2000
+              }
+            }} />
+
           </div>
           <div className="col-xl-5 ms-auto p-5">
+
+
             <h1 className='text-primary'>{data.product.name}</h1>
             <p>{data.product.productDetail}</p>
             <p className='mt-3 fs-4'> Brand : {data.product.brand}</p>
             <p className='mt-3 fs-4'> Category : {data.product.category}</p>
             <p className='mt-3 fs-4'> price : {data.product.price}</p>
             <button className='btn btn-primary mt-3 px-4 ' onClick={() => cartAddData(data)}>Add To Cart</button>
-            <Rating/>
+            <Rating />
 
+
+
+            <div className="App">
+              <a className="read-more-link" onClick={() => { setReadMore(!readMore) }}><h2>{linkName}</h2></a>
+              {readMore && extraContent}
+            </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div >
   )
 }
