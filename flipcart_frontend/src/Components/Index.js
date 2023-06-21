@@ -10,13 +10,13 @@ import { searchContexData } from './Contex'
 import Loader from './Loader'
 
 const Index = () => {
-  const ImageperRow = 2
-  const [next, setnext] = useState(ImageperRow)
+  const ImageperRow = 5
+  const [next, setnext] = useState(ImageperRow);
 
   const [valueData, setValueData] = useState([0])
   let { Data, setData } = useContext(searchContexData);
   const [sortBy, setSortBy] = useState('');
-  const pageSize = 6;
+  const pageSize = 9;
   const [page, setPage] = useState(0);
   const { loading, error, data } = useQuery(GET_ALL_PRODUCT, {
     variables: {
@@ -32,14 +32,9 @@ const Index = () => {
 
   };
 
-
-
   if (error) {
     console.log(error);
   }
-
-
-
 
   let DataSort = data?.products;
 

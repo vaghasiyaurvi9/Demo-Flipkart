@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// import mongoosePaginate from 'mongoose-paginate-v2';
 const productSchema = mongoose.Schema({
     name: {
         type: String,
@@ -40,5 +40,6 @@ const productSchema = mongoose.Schema({
     Stripe_Id: String,
     Stripe_priceId: String
 })
+// productSchema.plugin(mongoosePaginate);
 
 export default mongoose.model('productDetail', productSchema);

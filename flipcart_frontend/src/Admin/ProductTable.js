@@ -18,6 +18,10 @@ const ProductTable = () => {
             offset: 0
         }
     });
+    
+    useEffect(()=>{
+        refetch();
+    },[])
     const [deleteData] = useMutation(DELETE_PRODUCT);
 
 

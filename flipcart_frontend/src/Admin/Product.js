@@ -1,17 +1,16 @@
 import { useMutation, useQuery } from '@apollo/client';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ADD_PRODUCTS, UPDATE_PRODUCT } from '../gql/Mutation';
 import { ItemContext } from './Context';
 import { GET_SINGLE_PRODUCT } from '../gql/Queries';
 import Loader from '../Components/Loader';
 
 const Product = () => {
-
   const { selectedId, setSelectedId } = useContext(ItemContext);
   const [product, setproduct] = useState({});
   const [image, setImage] = useState('')
 
-  const [addProductdata, { error, loading, data }] = useMutation(ADD_PRODUCTS);
+  const [addProductdata, { error, loading, data  }] = useMutation(ADD_PRODUCTS);
   const [updateProductdata] = useMutation(UPDATE_PRODUCT);
   const { refetch, data: getData } = useQuery(GET_SINGLE_PRODUCT, {
     variables: { id: selectedId }, onCompleted:
@@ -19,6 +18,11 @@ const Product = () => {
         setproduct(data.product)
   }
   );
+
+
+  useEffect(()=>{
+    refetch();
+  },[refetch])
 
 
 
@@ -69,6 +73,8 @@ const Product = () => {
         variables: {
           addProduct: productschema
         }
+      }).then(()=>{
+        refetch();
       })
 
     } else {
@@ -96,9 +102,6 @@ const Product = () => {
       reader.readAsDataURL(event.target.files[0]);
     }
   }
-
-
-
 
   return (
     <div>
@@ -154,28 +157,16 @@ const Product = () => {
                         <label htmlFor="exampleInputPassword1">Url:</label>
                         <input type="file" onChange={onImageChange} className="filetype" />
                       </div>
-
-
                     </div>
-
                     <div className="card-footer">
                       {selectedId === 0 ? <button type="submit" className="btn btn-primary">Submit</button> : <button type="submit" className="btn btn-primary">Edit</button>}
-
                     </div>
                   </form>
                 </div>
-
-
-
               </div>
-
             </div>
-
           </div>
         </section>
-
-
-
       </div>
 
 

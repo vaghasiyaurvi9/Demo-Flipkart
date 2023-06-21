@@ -1,7 +1,7 @@
 const Product = `
 
 type products{
-    _id: ID!
+    _id: ID
     name: String
     price: String
     productDetail:String
@@ -38,6 +38,7 @@ input updateProductinput{
 type Query{
    
     products(limit : Int!,offset:Int!):[products]
+#    products(limit : Int,page:Int):[products]
     product(_id:ID!):products
     searchItem(searchItem:String!):[products]
     productsByCategory(name:String!):[products]

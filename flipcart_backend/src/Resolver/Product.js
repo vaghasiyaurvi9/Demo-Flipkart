@@ -4,11 +4,22 @@ const stripe = new Stripe('sk_test_51N6WIySEXyEfFfEC2Gdy7czIdtzu2vcwU2nKHcMAacfF
 
 const Product = {
     Query: {
+
         products: async (_, { limit, offset }) => {
             const products = await productSchema.find().limit(limit).skip(offset);
             return products;
-
         },
+
+        // products: async (_, { limit, page }) => {
+        //     const options ={
+        //         page:parseInt(page,10) || 1,
+        //         limit:parseInt(limit,10) || 3,
+        //     }
+        //     const products =await productSchema.paginate(_,options);
+        //     console.log("===products",products);
+        //     return products           
+        // },
+
         product: async (_, { _id }) => await productSchema.findById({ _id }),
         searchItem: async (_, { searchItem }) => {
             if (!searchItem) {
@@ -71,14 +82,13 @@ const Product = {
                 }
             })
             // console.log(product);
-
             const products = new productSchema({
 
                 ...addProduct,
                 Stripe_Id: product.id,
                 Stripe_priceId: product.default_price
             })
-            console.log("===product",product);
+            // console.log("===product",product);
             return await products.save();
 
         },
@@ -94,7 +104,7 @@ const Product = {
             updProduct.category = updateProduct.category
             updProduct.productDetail = updateProduct.productDetail
             updProduct.url = updateProduct.url
-            updProduct.status =updateProduct.status
+            updProduct.status = updateProduct.status
 
             const product = productSchema.findByIdAndUpdate(updateProduct._id, updProduct, { new: true });
             return await product;
@@ -106,13 +116,13 @@ const Product = {
             return await product;
 
         },
-        rateProduct :async (_,{rating,productId,userId}) =>{
-            const createrating = await productSchema.create({rating})
-            
-            const product =await new productSchema({
-                    rating:createrating,
-                    productId:productId,
-                    userId:userId
+        rateProduct: async (_, { rating, productId, userId }) => {
+            const createrating = await productSchema.create({ rating })
+
+            const product = await new productSchema({
+                rating: createrating,
+                productId: productId,
+                userId: userId
             })
             return await product.save();
         }
