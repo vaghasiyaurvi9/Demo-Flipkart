@@ -34,7 +34,8 @@ const productSchema = mongoose.Schema({
         type: String,
     },
     rating:{
-        type:Number
+        type:Number,
+        default:0
     },
     url: String,
     Stripe_Id: String,

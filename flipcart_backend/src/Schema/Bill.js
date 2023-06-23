@@ -1,5 +1,3 @@
-
-
 const Billtype = `
 scalar Number                       
 type address{
@@ -43,5 +41,6 @@ type Query{
   Bills:[Bills]
   getBills(id:ID):Bills 
 }
+
 `
 export default Billtype

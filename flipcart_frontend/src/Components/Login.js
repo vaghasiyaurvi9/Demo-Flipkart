@@ -9,7 +9,6 @@ import Loader from './Loader';
 const Login = () => {
 
     const [passwordType, setPasswordType] = useState("password");
-
     const navigate = useNavigate();
     const [loginField, setloginField] = useState({})
 

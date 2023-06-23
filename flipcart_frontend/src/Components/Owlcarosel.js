@@ -12,9 +12,7 @@ const Owlcarosel = () => {
           loop
           nav
         >
-
           <div ><img className="img" src={require('../images/15.webp')} /></div>
-
         </OwlCarousel>
       </div>
 

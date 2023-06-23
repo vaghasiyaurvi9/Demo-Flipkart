@@ -15,7 +15,7 @@ const registerSchema = mongoose.Schema({
         type:String,
         required:true 
     },
-    Stripe_Id: String,
+    Stripe_Id: String, 
 })
 
 export default  mongoose.model('registerUser',registerSchema);

@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import React, { useContext, useEffect, useState } from 'react'
 import { ADD_PRODUCTS, UPDATE_PRODUCT } from '../gql/Mutation';
 import { ItemContext } from './Context';
-import { GET_SINGLE_PRODUCT } from '../gql/Queries';
+import { GET_ALL_PRODUCT, GET_SINGLE_PRODUCT } from '../gql/Queries';
 import Loader from '../Components/Loader';
 
 const Product = () => {
@@ -72,10 +72,8 @@ const Product = () => {
       addProductdata({
         variables: {
           addProduct: productschema
-        }
-      }).then(()=>{
-        refetch();
-      })
+        },refetchQueries: [{ query:GET_ALL_PRODUCT}]
+      }).then(refetch())
 
     } else {
       if (selectedId) {

@@ -22,6 +22,7 @@ const ProductTable = () => {
     useEffect(()=>{
         refetch();
     },[])
+
     const [deleteData] = useMutation(DELETE_PRODUCT);
 
 

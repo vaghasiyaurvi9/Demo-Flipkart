@@ -17,7 +17,6 @@ const Register = () => {
             ...formFiled,
             [event.target.name]: event.target.value
         })
-
     }
 
     const [registerUserdata, { data, loading, error }] = useMutation(REGISTER_USER, {
@@ -78,8 +77,6 @@ const Register = () => {
             }
 
             <form action="" onSubmit={submitRegisterForm}>
-
-
                 <div className="container">
                     <div className="row   ">
                         <div className="col-5 mx-auto ">
@@ -103,17 +100,11 @@ const Register = () => {
                             <div>
                                 <input type="submit" value="submit" className='btn btn-primary px-5 rounded-pill mb-4' />
                             </div>
-
                             <Link to="/login" className=' pb-4'><p>Now able to Login data</p></Link>
-
                         </div>
-
                     </div>
                 </div>
-
-
             </form>
-
         </div>
     )
 }

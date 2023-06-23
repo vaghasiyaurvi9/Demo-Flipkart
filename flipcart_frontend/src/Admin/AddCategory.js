@@ -15,6 +15,8 @@ const AddCategory = () => {
   const { data, refetch } = useQuery(GET_ALL_CATEGORY);
   const [deleteData] = useMutation(DELETE_CATEGORY)
   const [categoruUpdate] = useMutation(UPDATE_CATEGORY);
+  // const [image,setImage] =useState('');
+  // console.log("image====",image);
   const { data: categoryDataById } = useQuery(CATEGORY_BY_ID, {
     variables: { categoryByIdId: updateId }, onCompleted: (data) => setcategoryDataTarget(data.categoryById)
   });
@@ -48,7 +50,7 @@ const AddCategory = () => {
 
   const categorySubmit = (e) => {
     e.preventDefault();
-
+    
     if (updateId !== '') {
       categoruUpdate({
         variables: {
@@ -56,13 +58,12 @@ const AddCategory = () => {
           name: categoryDataTarget.name
         }
       })
-
     } else {
       Category({
         variables: {
           category: categoryDataTarget
 
-        }, refetchQueries: [{ query: GET_ALL_CATEGORY }]
+        },refetchQueries:[{ query: GET_ALL_CATEGORY }]
       })
     }
     setcategoryDataTarget('');
@@ -112,16 +113,18 @@ const AddCategory = () => {
             <label htmlFor="">Status:</label>
             <div> <input type="text" onChange={categoryData} name='status' value={categoryDataTarget.status} /></div>
           </div>
+          {/* <div>
+            <label htmlFor="">images</label>
+            <input type="file" multiple onChange={(e)=>setImage(e.target.files)} />
+          </div> */}
           <div>
             <button className='mt-3 btn btn-outline-primary px-3'>Submit</button>
           </div>
         </form>
       </div>
 
-
       {/* show category */}
       <div className="container">
-
         <Table striped bordered hover>
           <thead>
             <tr>

@@ -6,7 +6,6 @@ const FRONTEND_DOMAIN = "http://localhost:3000";
 
 
 const Stripes = {
-
     Query: {
         createCheckoutSession: async (_, args) => {
             const userId = args.userId;

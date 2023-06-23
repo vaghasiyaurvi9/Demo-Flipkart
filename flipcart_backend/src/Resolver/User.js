@@ -60,7 +60,6 @@ const User = {
 
             const bcryptPassword = await bcrypt.hash(signupUser.password, 12);
 
-
             const userData = new registerSchema({
                 ...signupUser,
                 password: bcryptPassword,
@@ -104,15 +103,15 @@ const User = {
         },
         changePassword: async (_, { email, oldPassword, newPassword }) => {
 
-            const user = await registerSchema.findOne({ email: email });
-
+            const user = await registerSchema.findOne({ email:email});
+            if(!user)
+            {
+                throw new Error ('that email user is not valid')
+            }
             if (oldPassword === newPassword) {
                 throw new Error('new password and old password is not same');
-
             }
-
             const hashPassword = await bcrypt.hash(newPassword, 10);
-
             const updatePassword = {};
             updatePassword.password = hashPassword
             const users = await registerSchema.findOneAndUpdate({ email }, { $set: updatePassword }, { new: true })

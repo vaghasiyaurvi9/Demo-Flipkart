@@ -28,9 +28,7 @@ type CartData {
     data: [Carts]
   }
 
-
 type Query{
-  
     Carts(userId:ID):CartData                       
     getCarts(id:ID):Carts 
   
@@ -54,7 +52,7 @@ input CartInput{
 type Mutation{
     addCarts(cartInput:CartInput):Carts                     
     deleteCart(id:ID):String      
-    updateCarts(id:ID , quantity:Number , totalPrice:Number):Carts
+    updateCarts(id:ID,quantity:Number,totalPrice:Number):Carts
 }
 `
 

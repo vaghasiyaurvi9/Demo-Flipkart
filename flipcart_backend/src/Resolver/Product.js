@@ -27,7 +27,7 @@ const Product = {
             }
             return await productSchema.find({
                 "$or": [
-                    { "name": { $regex: searchItem } },
+                    { "name": { $regex: searchItem ,$options : "i"} },
 
                 ]
             })

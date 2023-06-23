@@ -1,13 +1,20 @@
-
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react'
 import { RESET_PASSWORD } from '../gql/Mutation';
+import { toast } from 'react-toastify';
+import { json, useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
+    const navigate =useNavigate();
     const [oldPassword, setoldPassword] = useState();
     const [email, setemail] = useState();
     const [newPassword, setnewPassword] = useState();
-    const [changePassword] = useMutation(RESET_PASSWORD);
+    const [changePassword] = useMutation(RESET_PASSWORD,{
+        onCompleted: (data) => {
+            navigate('/');
+            localStorage.setItem('userData',JSON.stringify(data))
+        }
+    });
 
     const submitData = (e) => {
         e.preventDefault();
@@ -18,7 +25,7 @@ const ChangePassword = () => {
                 newPassword: newPassword
             },
         })
-
+        
     }
     return (
         <div>
@@ -35,13 +42,10 @@ const ChangePassword = () => {
                     <label htmlFor="">New Password</label>
                     <input type="password" onChange={(e) => setnewPassword(e.target.value)} />
                 </div>
-
                 <div>
                     <button>submit</button>
                 </div>
             </form>
-
-
         </div>
     )
 }

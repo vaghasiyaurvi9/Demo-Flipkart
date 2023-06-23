@@ -25,7 +25,6 @@ const AddCartData = () => {
 
     });
 
-
     useEffect(() => {
         refetch();
     }, [])
@@ -55,7 +54,6 @@ const AddCartData = () => {
     // if (loading) return <h1>loading.....</h1>
 
     const removeCart = (cart) => {
-
         deleteCart({
             variables: {
                 id: cart
@@ -122,12 +120,12 @@ const AddCartData = () => {
     let subtotal = 0;
     let badge = 0
     // eslint-disable-next-line
-   data?.Carts?.data.map(cart => {
+    data?.Carts?.data.map(cart => {
         id === cart.userId ?
             subtotal += cart.totalPrice
             : <></>
         id === cart.userId ?
-             badge += cart.quantity
+            badge += cart.quantity
             : <></>
     });
 
@@ -136,8 +134,8 @@ const AddCartData = () => {
 
     return (
         <div>
-            
-            <NavBar badge={badge}/>
+
+            <NavBar badge={badge} />
 
             <div className="container">
                 <div className="row">

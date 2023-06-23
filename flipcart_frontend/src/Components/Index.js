@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import NavBar from './NavBar'
 import Category from './Category'
 import Owlcarosel from './Owlcarosel'
 import { useQuery } from '@apollo/client'
@@ -10,13 +9,14 @@ import { searchContexData } from './Contex'
 import Loader from './Loader'
 
 const Index = () => {
-  const ImageperRow = 5
+
+  const ImageperRow = 3
   const [next, setnext] = useState(ImageperRow);
 
   const [valueData, setValueData] = useState([0])
   let { Data, setData } = useContext(searchContexData);
   const [sortBy, setSortBy] = useState('');
-  const pageSize = 9;
+  const pageSize = 10;
   const [page, setPage] = useState(0);
   const { loading, error, data } = useQuery(GET_ALL_PRODUCT, {
     variables: {
@@ -27,9 +27,7 @@ const Index = () => {
 
 
   const handleMoreImage = () => {
-
     setnext(next + ImageperRow);
-
   };
 
   if (error) {
@@ -48,9 +46,6 @@ const Index = () => {
   // const min = valueData[0];
   // const max =valueData[1];
   // Data= DataSort.filter((i)=> i.price >= min && i.price <= max)
-
-
-
   if (loading) return <Loader />
   return (
     <div>
@@ -76,7 +71,6 @@ const Index = () => {
         <div className="row mt-5">
           {
             Data?.length === 0 ? <h1 className='text-primary text-center mb-5'>No Result Found </h1> :
-
               Data?.slice(0, next)?.map((productdata, index) => {
                 return (
                   productdata.status === "visible" ?
@@ -107,10 +101,8 @@ const Index = () => {
             Load more
           </button>
         )}
-           {/* <button className="mt-4 w-25 btn btn-primary" onClick={handleMoreImage}>Load more</button> */}
       </div>
       {/* pagination */}
-
       <div className="container">
         <div className="row">
           <div className="col-2 text-center mx-auto">
@@ -119,9 +111,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-
-
-
       <Footer />
     </div>
   )
